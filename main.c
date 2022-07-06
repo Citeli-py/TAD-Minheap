@@ -12,6 +12,9 @@ void print_info(void* info)
 int main()
 {
     char *a = "matheus123";
+    char b;
+    int i;
+
     Heap h = inicializar();
     for(int i=0; i<10; i++)
         inserir(h, i, &a[i], sizeof(char));
@@ -19,7 +22,11 @@ int main()
     print(h, print_info);
 
     for(int i=0; i<3; i++)
-        remover(h);
+    {
+        remover(h, &i, &b, sizeof(char));
+        printf("%c ", b);
+    }
+    printf("\n");
 
     print(h, print_info);
 
