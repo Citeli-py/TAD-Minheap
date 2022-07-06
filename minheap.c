@@ -72,13 +72,25 @@ void AjustarSubindo(Heap h, int pos)
     }
 }
 
-void inserir(Heap h, int key, void* x, int size)
+int cheia(Heap h)
 {
+    if(h->totalElementos<N)
+        return 1;
+    return 0;
+}
+
+int inserir(Heap h, int key, void* x, int size)
+{
+    if(!cheia(h))
+        return 0;
+
     h->elemento[h->totalElementos].key = key;
     h->elemento[h->totalElementos].info = (void*) malloc(size);
     memcpy(h->elemento[h->totalElementos].info, x, size);
     h->totalElementos ++;
     AjustarSubindo(h, h->totalElementos-1);
+
+    return 1;
 }
 
 
@@ -100,15 +112,22 @@ void AjustarDescendo(Heap h, int pos)
     }
 }
 
-void remover(Heap h)
+int remover(Heap h, int *key, void *x, int size)
 {
+    if(h->totalElementos<=0)
+        return 0;
+
     if(h->totalElementos!=0)
     {
         struct elem retorno = h->elemento[0];
+        *key = retorno.key;
+        memcpy(x, retorno.info, size);
         h->elemento[0] = h->elemento[h->totalElementos-1];
         h->totalElementos --;
         AjustarDescendo(h, 0);
     }
+
+    return 1;
 }
 
 void print(Heap h, void f(void* info))
