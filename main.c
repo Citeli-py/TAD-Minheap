@@ -11,20 +11,20 @@ void print_info(void* info)
 
 int main()
 {
-    char *a = "matheus123";
+    char *a = "Estrutura de dados";
     char b;
-    int i;
+    int j;
 
     Heap h = inicializar();
-    for(int i=0; i<10; i++)
+    for(int i=0; i<17; i++)
         inserir(h, i, &a[i], sizeof(char));
 
     print(h, print_info);
 
-    for(int i=0; i<3; i++)
+    for(int i=0; i<9; i++)
     {
-        remover(h, &i, &b, sizeof(char));
-        printf("%c ", b);
+        remover(h, &j, &b, sizeof(char));
+        printf("Removido: chave %d -> %c \n", j, b);
     }
     printf("\n");
 
